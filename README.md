@@ -7,7 +7,7 @@
 Test 2 : A simple String Calculator built in .NET 8. It exposes an Add(string numbers) method that parses a string of delimited numbers and returns their sum, with support for custom delimiters, mixed separators, and negative number validation.
 
 ## Demo
-
+![e4_string_calculator_demo](https://github.com/user-attachments/assets/8ed17571-ce7e-4045-827a-13edd3c7756f)
 
 ## How It Works
 
