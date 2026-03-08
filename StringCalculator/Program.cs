@@ -24,6 +24,9 @@ while (true)
     if (userInput.Trim().ToLower() == "q")
         break;
 
+    // Console.ReadLine interprets \n as literal characters, not as a newline.
+    // We need to convert the literal strings to actual escape characters
+    // so the calculator processes them the same way the test inputs do.
     var normalisedInput = userInput.Replace("\\r\\n", "\r\n").Replace("\\n", "\n");
 
     try
