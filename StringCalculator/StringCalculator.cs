@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text.RegularExpressions;
+using StringCalculator.Exceptions;
 
 namespace StringCalculator;
 public class Calculator
@@ -31,7 +32,7 @@ public class Calculator
         }
         else
         {
-            throw new Exception($"Invalid input");
+            throw new InvalidInputException($"Invalid input");
         }
     }
 
@@ -50,16 +51,18 @@ public class Calculator
         return nums;
     }
 
+    
     private static int SumOfNumbers(string[] nums)
     {
 
-        // simple app this will do.
-        // if we had big number we sould move 
+        /**
+         * 
+         */
         var negativeNumbers = nums.Where(x => int.Parse(x) < 0).ToList();
 
         if (negativeNumbers.Any())
         {
-            throw new Exception($"Negatives not allowed {string.Join(",", negativeNumbers)}");
+            throw new NegativeNumberException($"Negatives not allowed {string.Join(",", negativeNumbers)}");
         }
 
         int sum = 0;

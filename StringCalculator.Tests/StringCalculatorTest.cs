@@ -1,4 +1,5 @@
 ﻿using JetBrains.Annotations;
+using StringCalculator.Exceptions;
 
 namespace StringCalculator.Tests;
 
@@ -47,7 +48,7 @@ public class StringCalculatorTest
     {
         string input = "1,-4,-7";
         
-        var ex = Assert.Throws<Exception>(() => calculator.Add(input));
+        var ex = Assert.Throws<NegativeNumberException>(() => calculator.Add(input));
         Assert.Contains("-4", ex.Message);
         Assert.Contains("-7", ex.Message);
     }
@@ -59,7 +60,7 @@ public class StringCalculatorTest
     [InlineData("//;\n1")]
     public void Should_Throw_Invalid_Input_Exception_On_Invlid_Input(string input)
     {
-        var ex = Assert.Throws<Exception>(() => calculator.Add(input));
+        var ex = Assert.Throws<InvalidInputException>(() => calculator.Add(input));
 
         Assert.Equal("Invalid input", ex.Message);
     }
