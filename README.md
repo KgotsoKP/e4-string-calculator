@@ -23,6 +23,10 @@ The `Add` method accepts a string of numbers and returns their sum.
 - **Different delimiters** are supported — to change the delimiter, the beginning of the string should contain a separate line in the format `//[delimiter]\n[numbers...]` (e.g. `"//;\n1;2"` returns `3`). The first line is optional; all existing scenarios are still supported.
 - Calling `Add` with a **negative number** throws an exception with the message `"negatives not allowed"` followed by the negative number that was passed. If there are multiple negatives, all of them are shown in the exception message.
 
+## Observations
+
+- Test 2 has a deterministic set of inputs and outputs with clearly defined rules, so TDD was a natural fit. It was easy to write tests first and build up from there.
+- One interesting challenge was how \n behaves differently depending on context. In the test methods, "1\n2,3" contains an actual newline character, so the tests passed fine. But when the same input came through Console.ReadLine, the \n was read as a literal backslash and the letter n. So the tests were green, but the console had an edge case. It was a revealing insight.
 
 ## Getting Started
 
@@ -39,9 +43,3 @@ dotnet run
 ```bash
 dotnet test
 ```
-
-## Observations
-
-- Test 2 has a deterministic set of inputs and outputs with clearly defined rules, so TDD was a natural fit. It was easy to write tests first and build up from there.
-- One interesting challenge was how \n behaves differently depending on context. In the test methods, "1\n2,3" contains an actual newline character, so the tests passed fine. But when the same input came through Console.ReadLine, the \n was read as a literal backslash and the letter n. So the tests were green, but the console had an edge case. It was a revealing insight.
-
