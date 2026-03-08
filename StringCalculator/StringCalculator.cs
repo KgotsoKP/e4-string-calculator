@@ -3,30 +3,29 @@ using System.Text.RegularExpressions;
 using StringCalculator.Exceptions;
 
 namespace StringCalculator;
+
 public class Calculator
 {
     private string[] _defaultDelemeters = new[] { ",", "\n" };
     private const string _CustomDelimiter = "//";
-    
+    private const string _CustomDelimiterEndOfLine = "\n";
+
     public int Add(string numbers)
     {
-        if (string.IsNullOrEmpty(numbers))
-        {
-            return 0;
-        }
+        if (string.IsNullOrEmpty(numbers)) return 0;
 
         if (IsInputValid(numbers))
         {
             if (numbers.StartsWith(_CustomDelimiter))
             {
-                int newLineIndex = numbers.IndexOf("\n");
+                int newLineIndex = numbers.IndexOf(_CustomDelimiterEndOfLine);
                 var delimiter = numbers[_CustomDelimiter.Length..newLineIndex];
                 string numbersSubstring = numbers.Substring(newLineIndex + 1);
 
                 string[] result = SplitStringWithDelimiter(delimiter, numbersSubstring);
                 return SumOfNumbers(result);
             }
-            
+
             string[] nums = SplitStringWithDelimiter(_defaultDelemeters, numbers);
             return SumOfNumbers(nums);
         }
@@ -36,40 +35,41 @@ public class Calculator
         }
     }
 
+    /*
+     *  Overloads used for SplitStringWithDelimiter for simplicity
+     *  accepts both string and string[] delimiters.
+     *  This could also be solved with generics, but overloads
+     * are more readable for this use case.
+     */
     private static string[] SplitStringWithDelimiter(string[] delimiter, string input)
     {
         string[] nums = input.Split(delimiter, StringSplitOptions.None);
         return nums;
     }
-    
+
     private static string[] SplitStringWithDelimiter(string delimiter, string input)
     {
-
-        string[] delimiters = new string[] { delimiter };
-        string[] nums = input.Split(delimiters, StringSplitOptions.None);
-
-        return nums;
+        return input.Split(new[] { delimiter }, StringSplitOptions.None);
     }
 
-    
-    private static int SumOfNumbers(string[] nums)
-    {
 
-        /**
-         * 
-         */
-        var negativeNumbers = nums.Where(x => int.Parse(x) < 0).ToList();
+    /**
+     *  Assumption: input size is reasonably small, so iterating all numbers to check
+     *  for negatives is acceptable. If the list grows significantly, we can consider an
+     *  early-exit approach where we return on the first negative found, and only collect
+     *  all negatives if that case is hit.
+     */
+    private static int SumOfNumbers(string[] numbers)
+    {
+        var negativeNumbers = numbers.Where(x => int.Parse(x) < 0).ToList();
 
         if (negativeNumbers.Any())
         {
             throw new NegativeNumberException($"Negatives not allowed {string.Join(",", negativeNumbers)}");
         }
 
-        int sum = 0;
-        foreach (string num in nums)
-        {
-            sum += int.Parse(num);
-        }
+        int sum = numbers.Sum(n => int.Parse(n));
+        ;
 
         return sum;
     }
