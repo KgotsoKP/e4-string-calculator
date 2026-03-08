@@ -1,8 +1,11 @@
 # e4-string-calculator
 
-![Build](https://img.shields.io/github/actions/workflow/status/KgotsoKP/e4-string-calculator/dotnet.yml?branch=main&label=build)
-![Tests](https://img.shields.io/github/actions/workflow/status/KgotsoKP/e4-string-calculator/dotnet.yml?branch=main&label=tests)
-![.NET](https://img.shields.io/badge/.NET-8.0-512BD4?logo=dotnet)
+![Build](https://img.shields.io/github/actions/workflow/status/KgotsoKP/e4-string-calculator/dotnet.yml?branch=main&label=build&style=for-the-badge)
+![Tests](https://img.shields.io/github/actions/workflow/status/KgotsoKP/e4-string-calculator/dotnet.yml?branch=main&label=tests&style=for-the-badge)
+![.NET](https://img.shields.io/badge/.NET-8.0-512BD4?logo=dotnet&style=for-the-badge&logoColor=white)
+![Time Taken](https://img.shields.io/badge/Time%20Taken-~6%20hours-blue?style=for-the-badge&logo=clockify&logoColor=white)
+
+
 
 Test 2 : A simple String Calculator built in .NET 8. It exposes an Add(string numbers) method that parses a string of delimited numbers and returns their sum, with support for custom delimiters, mixed separators, and negative number validation.
 
